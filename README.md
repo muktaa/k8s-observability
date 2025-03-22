@@ -103,3 +103,26 @@ Use the `cleanup.sh` script to remove all created resources:
 ## Note
 
 The cluster creation process typically takes 10-15 minutes to complete. Please wait for the cluster to be fully created before proceeding with monitoring stack installation.
+
+# Tips
+
+### Check the created cluster
+kubectl get nodes
+kubectl get namespaces
+kubectl get pods -n demo-app
+
+### Check current state of monitoring
+kubectl get pods -n monitoring
+kubectl port-forward svc/prometheus-grafana -n monitoring 3000:80
+
+### Enable metric collection
+kubectl describe deployment space-explorer -n demo-app
+
+cat service-monitor.yaml
+kubectl apply -f service-monitor.yaml
+
+kubectl get servicemonitor -n monitoring
+
+### Port forward to prometheus
+kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090
+

@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: space-explorer-monitor
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: space-explorer
+  namespaceSelector:
+    matchNames:
+      - demo-app
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 15s
